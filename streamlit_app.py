@@ -1,44 +1,40 @@
 import streamlit as st
 import pandas as pd
 
-# 1. Inject the Polyester Spider-Man background via HTML/CSS
-# This uses a public, loopable background link that fills the screen behind the content
+# 1. Force the background to clear out Streamlit's dark theme
 st.markdown(
     """
     <style>
-    /* target the main container to make it see-through */
-    .stApp {
-        background: transparent;
+    /* This overrides the default black background */
+    .stApp, [data-testid="stAppViewContainer"] {
+        background-color: rgba(0,0,0,0) !important;
+        background: none !important;
     }
     
-    /* insert a fixed background video behind everything */
-    .stApp::before {
-        content: "";
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100vw;
-        height: 100vh;
-        z-index: -1;
-        background-image: url('https://giphy.com'); /* A placeholder classic spidey loop */
-        background-size: cover;
-        background-position: center;
-        opacity: 0.25; /* Blends it into the background so you can still read text */
+    /* This places the animated loop completely behind your site */
+    body {
+        background-image: url('https://giphy.com') !important;
+        background-size: cover !important;
+        background-position: center !important;
+        background-attachment: fixed !important;
     }
 
-    /* Make the text boxes and sliders easy to read over the video background */
-    .stSlider, h1, h3, p {
-        background-color: rgba(0, 0, 0, 0.6);
-        padding: 10px;
+    /* Make the text and sliders stand out clearly so you can read them */
+    h1, h3, p, label, .stSlider {
+        background-color: rgba(15, 15, 15, 0.75);
+        padding: 12px;
         border-radius: 8px;
-        color: white !important;
+        color: #ffffff !important;
+    }
+    div[data-testid="stWidgetLabel"] p {
+        color: #ffffff !important;
     }
     </style>
     """,
     unsafe_allow_html=True
 )
 
-# 2. Your Interactive Webpage Content
+# 2. Your Webpage Content
 st.title("🏙️ Damascus Population Calculator")
 st.write("Adjust the parameters below to project the exponential population growth sequence.")
 
